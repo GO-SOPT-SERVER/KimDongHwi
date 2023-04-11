@@ -48,7 +48,11 @@ public class BankService {
         String name = sc.next();
         System.out.println("주민번호를 입력해주세요 (* - 부호는 빼고 입력해주세요)"); //validation은 pass
         Long personalNumber = sc.nextLong();
-        Member member = new Member(name, personalNumber);
-        memberRepository.saveMember(personalNumber, member);
+        if(!memberRepository.duplMemberCheck(personalNumber)){
+            Member member = new Member(name, personalNumber);
+            memberRepository.saveMember(personalNumber, member);
+        } else {
+            System.out.println("중복된 회원입니다.");
+        }
     }
 }

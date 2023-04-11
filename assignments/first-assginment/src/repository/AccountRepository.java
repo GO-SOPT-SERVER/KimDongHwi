@@ -19,9 +19,7 @@ public class AccountRepository {
         return instance;
     }
     public void saveAccount(Long accountNum, Account account) { // 계좌 생성
-        System.out.println("accountNum = " + accountNum.getClass().getTypeName());
         accountRepository.put(accountNum, account);
-        System.out.println(accountRepository.get(accountNum));
     }
 
     public Long accountCheck(Long accountNum, String password) { //계좌 유무 확인

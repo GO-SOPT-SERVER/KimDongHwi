@@ -40,4 +40,6 @@ public class MemberRepository {
         }
         return -1L;
     }
+
+    public boolean duplMemberCheck(Long personalNum) {return memberRepository.containsKey(personalNum);}
 }

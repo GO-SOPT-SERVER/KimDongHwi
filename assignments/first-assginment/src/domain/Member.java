@@ -21,10 +21,6 @@ public class Member {
         return name;
     }
 
-//    public List<Long> getAccountsID() {
-//        return accountsID;
-//    }
-
     public Long getId() {
         return id;
     }

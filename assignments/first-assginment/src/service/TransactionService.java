@@ -21,7 +21,6 @@ public class TransactionService {
         Account myAccount = accountRepository.getAccount(accountNum);
         Long myBalance = myAccount.getBalance();
         if (workCode == 1) {
-            if (checkBalance(myBalance)){
                 System.out.println("원하시는 금액을 입력해주세요");
                 Long withdraw = sc.nextLong();
                 List<Long> withdrawResult = withdraw(accountNum, myAccount, myBalance, withdraw);
@@ -30,7 +29,7 @@ public class TransactionService {
                     System.out.println("출금 금액 : " + withdrawResult.get(0));
                     System.out.println("잔액 : " + withdrawResult.get(1));
                 }
-            }
+
         } else if (workCode == 2) {
             System.out.println("금액을 넣어주세요.");
             Long deposit = sc.nextLong();
@@ -39,10 +38,7 @@ public class TransactionService {
             System.out.println("입금 금액 : " + depositResult.get(0));
             System.out.println("잔액 : " + depositResult.get(1));
         } else if (workCode == 3) {
-            if (checkBalance(myBalance)){
                 transfer(accountNum, myAccount, myBalance);
-            }
-
         }
 
     }
@@ -63,15 +59,6 @@ public class TransactionService {
             System.out.println("잔액 :: " + withdrawResult.get(1));
         }
         //withdraw랑 deposit 이용해서 나머지 완성
-    }
-
-    private boolean checkBalance(Long myBalance) { // 잔액 0원인지 확인
-        System.out.println("현재 잔액 :: " + myBalance);
-        if (myBalance ==0L){
-            System.out.println("출금 가능 금액이 없습니다.");
-            return false;
-        }
-        return true;
     }
 
     private List<Long> deposit(Long accountNum, Account myAccount, Long balance, Long deposit) {
@@ -96,6 +83,7 @@ public class TransactionService {
             objects.add(remain);
         } else {
             System.out.println("잔액이 부족합니다.");
+            System.out.println("현재 잔액 :: " + balance);
         }
         return objects;
     }
