@@ -24,16 +24,20 @@ public class PostController {
 
     @GetMapping("/posts/{posdId}")
     public String getOne(@PathVariable final Long posdId) {
-        Post post = postService.getPost(posdId);
+        try {
+            Post post = postService.getPost(posdId);
+            return "Title: " + post.getTitle() + "\n  Text : " +post.getText();
+        } catch (IndexOutOfBoundsException e) {
+            return "찾으시는 포스트가 존재하지 않습니다.";
+        }
 
-        return "Title: " + post.getTitle() + "\n  Text : " +post.getText();
     }
 
     @GetMapping("/posts/search")
     public String search(@RequestParam final String title) {
         String text = postService.findPost(title);
 
-        return text;
+        return "Title: " + title + "\n  Text : " +text;
     }
 
 }
