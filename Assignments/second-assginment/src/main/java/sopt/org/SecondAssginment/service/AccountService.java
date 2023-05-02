@@ -8,8 +8,8 @@ import sopt.org.SecondAssginment.domain.Account;
 import sopt.org.SecondAssginment.domain.Post;
 import sopt.org.SecondAssginment.domain.User;
 
-import static sopt.org.SecondSeminar.SecondSeminarApplication.*;
-import static sopt.org.SecondSeminar.SecondSeminarApplication.userList;
+import static sopt.org.SecondAssginment.SecondSeminarApplication.*;
+import static sopt.org.SecondAssginment.SecondSeminarApplication.userList;
 
 @Service
 public class AccountService {
