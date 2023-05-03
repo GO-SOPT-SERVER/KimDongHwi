@@ -18,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserResponseDto create(UserRequestDto request) throws EmailException, NickNameException {
+    public UserResponseDto create(UserRequestDto request) throws NickNameException {
         checkDuplicationEmail(request.getEmail());
         checkDuplicationNickname(request.getNickname());
 

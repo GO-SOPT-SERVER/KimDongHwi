@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sopt.org.Thridassginment.common.dto.ApiResponseDto;
-import sopt.org.Thridassginment.exception.ErrorStatus;
+import sopt.org.Thridassginment.exception.*;
 
 
 @RestControllerAdvice // ControllerAdvice + ResponseBody를 합친 어노테이션
@@ -22,18 +22,29 @@ public class ControllerExceptionAdvice {
         return ApiResponseDto.error(ErrorStatus.VALIDATION_REQUEST_MISSING_EXCEPTION);
     }
 
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ExceptionHandler(NullPointerException.class)
-//    protected ApiResponseDto handleNullPointerException(final NullPointerException e) {
-//        return ApiResponseDto.error(ErrorStatus.NULL_POINTER_EXCEPTION);
-//    }
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(EmailException.class)
+    protected ApiResponseDto handleEmailException() {
+        return ApiResponseDto.error(ErrorStatus.CONFLICT_EMAIL_EXCEPTION);
+    }
 
-//    @ResponseStatus(HttpStatus.CONFLICT)
-//    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-//    protected ApiResponseDto handleConstraintViolationException(final SQLIntegrityConstraintViolationException e) {
-//        System.out.println(e.getClass());
-//        return ApiResponseDto.error(ErrorStatus.CONFLICT_EMAIL_EXCEPTION);
-//    }
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(NickNameException.class)
+    protected ApiResponseDto handleNickNameException() {
+        return ApiResponseDto.error(ErrorStatus.CONFLICT_NICKNAME_EXCEPTION);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NullPostException.class)
+    protected ApiResponseDto handleNullPostException() {
+        return ApiResponseDto.error(ErrorStatus.NO_POST_EXCEPTION);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NullUserException.class)
+    protected ApiResponseDto handleNullUserException() {
+        return ApiResponseDto.error(ErrorStatus.NO_USER_EXCEPTION);
+    }
 }
 
 

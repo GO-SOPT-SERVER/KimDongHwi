@@ -8,6 +8,8 @@ import sopt.org.Thridassginment.controller.dto.response.OnePostResponseDto;
 import sopt.org.Thridassginment.controller.dto.response.PostResponseDto;
 import sopt.org.Thridassginment.domain.Post;
 import sopt.org.Thridassginment.domain.User;
+import sopt.org.Thridassginment.exception.NullPostException;
+import sopt.org.Thridassginment.exception.NullUserException;
 import sopt.org.Thridassginment.infrastructure.PostRepository;
 import sopt.org.Thridassginment.infrastructure.UserRepository;
 
@@ -21,7 +23,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public PostResponseDto post(PostRequestDto requestDto) throws NullPointerException{
+    public PostResponseDto post(PostRequestDto requestDto) throws NullUserException {
 
         //엔티티 조회
         try {
@@ -30,22 +32,22 @@ public class PostService {
             postRepository.save(post);
             return PostResponseDto.of(post.getId(), post.getUser().getNickname(), post.getTitle());
         } catch (NullPointerException e) {
-            throw new NullPointerException();
+            throw new NullUserException();
         }
     }
 
-    public OnePostResponseDto findPostbyId(Long postId) throws NullPointerException{
+    public OnePostResponseDto findPostbyId(Long postId) throws NullPostException {
         try {
             Post post = postRepository.findById(postId);
             return OnePostResponseDto.of(post.getId(), post.getUser().getNickname(), post.getTitle(), post.getText(), post.getPostTime());
         } catch (NullPointerException e) {
-            throw new NullPointerException();
+            throw new NullPostException();
         }
     }
 
     public List<PostResponseDto> findPosts() {
         List<PostResponseDto> postResponseDtoList = new ArrayList<>();
-        postRepository.findAll().stream().forEach( post -> {
+        postRepository.findAll().forEach( post -> {
             postResponseDtoList.add(PostResponseDto.of(post.getId(), post.getUser().getNickname(), post.getTitle()));
         });
         return postResponseDtoList;

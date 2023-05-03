@@ -7,7 +7,6 @@ import sopt.org.Thridassginment.common.dto.ApiResponseDto;
 import sopt.org.Thridassginment.controller.dto.request.PostRequestDto;
 import sopt.org.Thridassginment.controller.dto.response.OnePostResponseDto;
 import sopt.org.Thridassginment.controller.dto.response.PostResponseDto;
-import sopt.org.Thridassginment.exception.ErrorStatus;
 import sopt.org.Thridassginment.exception.SuccessStatus;
 import sopt.org.Thridassginment.service.PostService;
 
@@ -24,11 +23,7 @@ public class PostController {
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponseDto<PostResponseDto> create(@RequestBody @Valid final PostRequestDto postRequestDto) {
-        try {
-            return ApiResponseDto.success(SuccessStatus.POSTING_SUCCESS, postService.post(postRequestDto));
-        } catch (NullPointerException e) {
-            return NoUserExceptionHandler();
-        }
+        return ApiResponseDto.success(SuccessStatus.POSTING_SUCCESS, postService.post(postRequestDto));
     }
 
     @GetMapping
@@ -40,20 +35,6 @@ public class PostController {
     @GetMapping("/{postId}")
     @ResponseStatus(HttpStatus.OK)
     public ApiResponseDto<OnePostResponseDto> getPostbyId(@PathVariable final Long postId) {
-        try {
-            return ApiResponseDto.success(SuccessStatus.LOADINGPOST_SUCCESS, postService.findPostbyId(postId));
-        } catch (NullPointerException e) {
-            return NoPostExceptionHandler(ErrorStatus.NO_POST_EXCEPTION);
-        }
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    private static ApiResponseDto NoPostExceptionHandler(ErrorStatus noPostException) {
-        return ApiResponseDto.error(noPostException);
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    private static ApiResponseDto NoUserExceptionHandler() {
-        return NoPostExceptionHandler(ErrorStatus.NO_USER_EXCEPTION);
+        return ApiResponseDto.success(SuccessStatus.LOADINGPOST_SUCCESS, postService.findPostbyId(postId));
     }
 }
