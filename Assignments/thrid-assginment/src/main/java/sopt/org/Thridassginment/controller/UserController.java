@@ -29,7 +29,7 @@ public class UserController {
         try {
             return ApiResponseDto.success(SuccessStatus.SIGNUP_SUCCESS, userService.create(request));
         } catch (EmailException e) {
-            return NickNameExceptionHandler(ErrorStatus.CONFLICT_EMAIL_EXCEPTION);
+            return EmailExceptionHandler(ErrorStatus.CONFLICT_EMAIL_EXCEPTION);
         } catch (NickNameException e) {
             return NickNameExceptionHandler(ErrorStatus.CONFLICT_NICKNAME_EXCEPTION);
         }

@@ -31,11 +31,6 @@ public class PostController {
         }
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    private static ApiResponseDto NoUserExceptionHandler() {
-        return NoPostExceptionHandler(ErrorStatus.NO_USER_EXCEPTION);
-    }
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ApiResponseDto<List> getPosts() {
@@ -55,5 +50,10 @@ public class PostController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     private static ApiResponseDto NoPostExceptionHandler(ErrorStatus noPostException) {
         return ApiResponseDto.error(noPostException);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private static ApiResponseDto NoUserExceptionHandler() {
+        return NoPostExceptionHandler(ErrorStatus.NO_USER_EXCEPTION);
     }
 }
