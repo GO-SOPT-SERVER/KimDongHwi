@@ -14,12 +14,27 @@ public enum ErrorStatus {
     VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     VALIDATION_REQUEST_MISSING_EXCEPTION(HttpStatus.BAD_REQUEST, "요청값이 입력되지 않았습니다."),
 
+    /**
+     * 400 BAD REQUEST
+     */
+    REQUEST_VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다"),
+
 
     /*
     CONFLICT
      */
     CONFLICT_EMAIL_EXCEPTION(HttpStatus.CONFLICT, "이미 등록된 이메일입니다."),
     CONFLICT_NICKNAME_EXCEPTION(HttpStatus.CONFLICT, "이미 등록된 닉네임입니다."),
+
+    /**
+     * 409 CONFLICT
+     */
+    ALREADY_EXIST_USER_EXCEPTION(HttpStatus.CONFLICT, "이미 존재하는 유저입니다"),
+
+    /**
+     * 404 NOT FOUND
+     */
+    NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
 
     /*
     SERVER_ERROR
@@ -31,4 +46,8 @@ public enum ErrorStatus {
 
     private final HttpStatus httpStatus;
     private final String message;
+
+    public int getHttpStatusCode() {
+        return httpStatus.value();
+    }
 }
