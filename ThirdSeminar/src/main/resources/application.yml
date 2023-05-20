@@ -20,3 +20,5 @@ logging:
         type:
           descriptor:
             sql: trace
+jwt:
+  secret: 12hdaliuwefh2384h1ejwlifahieuurh2o83rhiuhiuhed871hiudha872h3
