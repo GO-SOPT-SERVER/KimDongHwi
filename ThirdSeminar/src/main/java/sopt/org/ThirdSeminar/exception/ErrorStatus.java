@@ -28,6 +28,7 @@ public enum ErrorStatus {
      */
     CONFLICT_EMAIL_EXCEPTION(HttpStatus.CONFLICT, "이미 등록된 이메일입니다."),
     CONFLICT_NICKNAME_EXCEPTION(HttpStatus.CONFLICT, "이미 등록된 닉네임입니다."),
+    INVALID_MULTIPART_EXTENSION_EXCEPTION(HttpStatus.CONFLICT, "유효하지 않은 파일입니다."),
 
     /**
      * 409 CONFLICT
@@ -38,6 +39,8 @@ public enum ErrorStatus {
      * 404 NOT FOUND
      */
     NOT_FOUND_USER_EXCEPTION(HttpStatus.NOT_FOUND, "존재하지 않는 유저입니다"),
+    NOT_FOUND_SAVE_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "이미지가 존재하지 않습니다."),
+    NOT_FOUND_IMAGE_EXCEPTION(HttpStatus.NOT_FOUND, "저장된 이미지가 존재하지 않습니다."),
 
     /*
     SERVER_ERROR

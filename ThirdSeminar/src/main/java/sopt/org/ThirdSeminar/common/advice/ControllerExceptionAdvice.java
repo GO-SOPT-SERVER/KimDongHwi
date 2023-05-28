@@ -33,6 +33,7 @@ public class ControllerExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     protected ApiResponseDto<Object> handleException(final Exception e) {
+        e.printStackTrace();
         return ApiResponseDto.error(ErrorStatus.INTERNAL_SERVER_ERROR);
     }
 
