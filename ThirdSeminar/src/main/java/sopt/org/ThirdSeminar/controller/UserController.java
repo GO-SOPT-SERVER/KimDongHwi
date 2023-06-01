@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sopt.org.ThirdSeminar.common.dto.ApiResponseDto;
 import sopt.org.ThirdSeminar.config.jwt.JwtService;
+import sopt.org.ThirdSeminar.config.redis.TokenDto;
 import sopt.org.ThirdSeminar.controller.dto.request.UserLoginRequestDto;
 import sopt.org.ThirdSeminar.controller.dto.request.UserRequestDto;
 import sopt.org.ThirdSeminar.controller.dto.response.UserLoginResponseDto;
@@ -33,7 +34,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponseDto<UserLoginResponseDto> login(@RequestBody @Valid final UserLoginRequestDto request) {
         final Long userId = userService.login(request);
-        final String token = jwtService.issuedToken(String.valueOf(userId));
-        return ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS, UserLoginResponseDto.of(userId, token));
+        final TokenDto refreshToken = jwtService.signIn(String.valueOf(userId)); //로그인이 성공하면 토큰을 발행해줌
+        return ApiResponseDto.success(SuccessStatus.LOGIN_SUCCESS, UserLoginResponseDto.of(userId, refreshToken.getAccessToken(), refreshToken.getRefreshToken()));
     }
 }

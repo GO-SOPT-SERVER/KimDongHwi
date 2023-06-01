@@ -17,5 +17,5 @@ public class WebConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(userIdResolver);
     }
-
+    //우리가 만든 userId 리졸버를 등록
 }

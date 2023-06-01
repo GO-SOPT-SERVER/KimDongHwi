@@ -19,13 +19,12 @@ import javax.validation.Valid;
 public class BoardController {
 
     private final BoardService boardService;
-    private final JwtService jwtService;
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponseDto create(
-            @UserId Long userId,
-            @RequestBody @Valid final BoardRequestDto request) {
+            @UserId Long userId, //여기서 access token 유효성 검증이 시작
+            @RequestBody @Valid final BoardRequestDto request){
         boardService.create(userId, request);
         return ApiResponseDto.success(SuccessStatus.CREATE_BOARD_SUCCESS);
     }
